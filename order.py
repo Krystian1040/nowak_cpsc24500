@@ -37,7 +37,7 @@ class Order:
     #Print receipt
     def __str__(self):
         output = "\n" + "=" * 40 + "\n"
-        output += "STARLIGHT COFFEE RECEIPT\n"
+        output += "STARLIGHT COFFEE RECEIPT".center(40) + "\n"
         output += "=" * 40 + "\n"
         output += f"Customer: {self.customer_name}\n"
         output += "-" * 40 + "\n"
@@ -54,4 +54,3 @@ class Order:
         output += "=" * 40 + "\n"
 
         return output
-    
