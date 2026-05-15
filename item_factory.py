@@ -1,19 +1,7 @@
-"""
-item_factory.py - Week 8 Starter
-
-ItemFactory uses the FACTORY pattern. The caller passes a string like "Book"
-and the factory returns the right concrete subclass.
-
-Tip: a dictionary mapping type strings to classes works well, but a simple
-if/elif chain is also fine.
-
-create_item(item_type, title, author, year, *extras)
-- item_type: "Book", "DVD", or "Magazine" (case-insensitive)
-- For Book, extras are: isbn, page_count
-- For DVD, extras are: runtime_minutes, rating
-- For Magazine, extras are: issue_number, month
-- Raise ValueError for unknown types
-"""
+#Assignment #8- Library Catalog System
+#item_factory.py
+#Christian Nowak
+#OOP
 
 from book import Book
 from dvd import DVD
@@ -24,7 +12,31 @@ class ItemFactory:
 
     @classmethod
     def create_item(cls, item_type, title, author, year, *extras):
-        # TODO: lowercase item_type for comparison
-        # TODO: dispatch on type, unpack extras into the right constructor
-        # TODO: raise ValueError for unknown types
-        pass
+        item_type = item_type.lower()
+
+        if item_type == "book":
+            if len(extras) != 3:
+                raise ValueError("Book requires ISBN, page count, and checked out status.")
+            isbn = extras[0]
+            page_count = extras[1]
+            checked_out = extras[2]
+            return Book(title, author, year, isbn, page_count, checked_out)
+
+        elif item_type == "dvd":
+            if len(extras) != 3:
+                raise ValueError("DVD requires runtime, rating, and checked out status.")
+            runtime_minutes = extras[0]
+            rating = extras[1]
+            checked_out = extras[2]
+            return DVD(title, author, year, runtime_minutes, rating, checked_out)
+
+        elif item_type == "magazine":
+            if len(extras) != 3:
+                raise ValueError("Magazine requires issue number, month, and checked out status.")
+            issue_number = extras[0]
+            month = extras[1]
+            checked_out = extras[2]
+            return Magazine(title, author, year, issue_number, month, checked_out)
+
+        else:
+            raise ValueError("Unknown item type.")
